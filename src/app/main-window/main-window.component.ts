@@ -103,7 +103,8 @@ req.MaxIterations = 18;
 
     let msg = "{\"RequestId\":\"" + this.newGuid() + "\",\"Height\":" + this.height +",\"Width\":"+ this.width +",\"CalculationId\":\"" + this.hubConnection.connectionId + "\",\"Parts\":" + "4.0" + ",\"XReminder\":" + "-2.0" +",\"YReminder\":"+ "1.0" + ",\"Step\":0.03,\"MaxBetrag\":4,\"MaxIterations\":18}"
     console.log(msg);
-    this.client.sendMessage(msg);
+    const encode = Buffer.from(msg, 'binary').toString('base64');
+    this.client.sendMessage(encode);
   }
 
     newGuid() {
