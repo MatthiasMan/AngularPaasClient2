@@ -86,10 +86,11 @@ export class MainWindowComponent implements OnInit {
     console.log("starting...")
     console.log(this.height);
     console.log(this.width);
+    console.log(this.hubConnection.connectionId);
     var req = new CalculationRequest();
 
-    req.Height = 120;
-    req.Width = 120;
+    req.Height = parseInt(this.height);
+    req.Width = parseInt(this.width);
     req.CalculationId = this.hubConnection.connectionId!;
     req.Parts = 4;
     req.XReminder = -2.0;
