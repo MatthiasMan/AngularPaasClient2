@@ -92,11 +92,12 @@ export class MainWindowComponent implements OnInit {
     req.Height = parseInt(this.height);
     req.Width = parseInt(this.width);
     req.CalculationId = this.hubConnection.connectionId!;
-    req.Parts = 4;
+    req.Parts = 4.0;
     req.XReminder = -2.0;
     req.YReminder = 1.0;
     req.Step = 0.03;
-
+req.MaxBetrag = 4,
+req.MaxIterations = 18;
     var jsonReq = JSON.stringify(req);
 console.log(jsonReq);
     this.client.sendMessage(jsonReq);
