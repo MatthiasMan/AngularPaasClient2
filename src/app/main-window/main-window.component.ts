@@ -82,7 +82,7 @@ export class MainWindowComponent implements OnInit {
   }
 
   run() {
-    this.Service.sendUpdate('hallo');
+
     console.log("starting...")
     console.log(this.height);
     console.log(this.width);
