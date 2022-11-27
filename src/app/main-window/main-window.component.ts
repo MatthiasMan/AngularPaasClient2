@@ -85,7 +85,7 @@ export class MainWindowComponent implements OnInit {
   run() {
 
 
-    console.log("starting...")
+    /*console.log("starting...")
 
 
     var req = new CalculationRequest();
@@ -99,10 +99,21 @@ export class MainWindowComponent implements OnInit {
     req.Step = 0.03;
 req.MaxBetrag = 4,
 req.MaxIterations = 18;
-    var jsonReq = JSON.stringify(req);
-    let f = "3add7691-0fd5-0568-937e-6f51664ec007";
-    let msg = "{\"RequestId\":\"" + f + "\",\"Height\":" + this.height +",\"Width\":"+ this.width +",\"CalculationId\":" + this.hubConnection.connectionId + ",\"Parts\":" + "4.0" + ",\"XReminder\":" + "-2.0" +",\"YReminder\":"+ "1.0" + ",\"Step\":0.03,\"MaxBetrag\":4,\"MaxIterations\":18}"
+    var jsonReq = JSON.stringify(req);*/
+
+    let msg = "{\"RequestId\":\"" + this.newGuid() + "\",\"Height\":" + this.height +",\"Width\":"+ this.width +",\"CalculationId\":\"" + this.hubConnection.connectionId + "\",\"Parts\":" + "4.0" + ",\"XReminder\":" + "-2.0" +",\"YReminder\":"+ "1.0" + ",\"Step\":0.03,\"MaxBetrag\":4,\"MaxIterations\":18}"
     console.log(msg);
     this.client.sendMessage(msg);
   }
+
+    newGuid() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c)=> {
+        var r = Math.random() * 16 | 0,
+          v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+      
+      
+    }
+     
 }
