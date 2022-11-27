@@ -2,6 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import { QueueClient, QueueServiceClient } from '@azure/storage-queue';
 import * as signalR from '@microsoft/signalr';
 import { HubConnection, IHttpConnectionOptions } from '@microsoft/signalr';
+import { Guid } from 'guid-typescript';
 import { CalculationRequest } from '../calculation-request';
 import { PictureDoneService } from '../picture-done.service';
 import { QueueServiceService } from '../queue-service.service';
@@ -82,7 +83,8 @@ export class MainWindowComponent implements OnInit {
   }
 
   run() {
-
+    var l =  Guid.create();
+    console.log("l ist: " + l);
     console.log("starting...")
     console.log(this.height);
     console.log(this.width);

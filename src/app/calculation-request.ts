@@ -3,7 +3,8 @@ import { Guid } from "guid-typescript";
 export class CalculationRequest {
 
     constructor() {
-        this.RequestId = "3add7691-0fd5-0568-937e-6f51664ec007" + Math.floor(Math.random());
+        var l =  Guid.create();
+        this.RequestId = l.toString();
 
     }
 
