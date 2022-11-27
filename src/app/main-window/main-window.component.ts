@@ -83,12 +83,11 @@ export class MainWindowComponent implements OnInit {
   }
 
   run() {
-    var l =  Guid.create();
-    console.log("l ist: " + l);
+
+
     console.log("starting...")
-    console.log(this.height);
-    console.log(this.width);
-    console.log(this.hubConnection.connectionId);
+
+
     var req = new CalculationRequest();
 
     req.Height = parseInt(this.height);
@@ -101,7 +100,9 @@ export class MainWindowComponent implements OnInit {
 req.MaxBetrag = 4,
 req.MaxIterations = 18;
     var jsonReq = JSON.stringify(req);
-console.log(jsonReq);
-    this.client.sendMessage(jsonReq);
+    let f = "3add7691-0fd5-0568-937e-6f51664ec007";
+    let msg = "{\"RequestId\":\"" + f + "\",\"Height\":" + this.height +",\"Width\":"+ this.width +",\"CalculationId\":" + this.hubConnection.connectionId + ",\"Parts\":" + "4.0" + ",\"XReminder\":" + "-2.0" +",\"YReminder\":"+ "1.0" + ",\"Step\":0.03,\"MaxBetrag\":4,\"MaxIterations\":18}"
+    console.log(msg);
+    this.client.sendMessage(msg);
   }
 }
