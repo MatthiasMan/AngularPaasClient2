@@ -98,7 +98,7 @@ export class MainWindowComponent implements OnInit {
     req.Step = 0.03;
 
     var jsonReq = JSON.stringify(req);
-
+console.log(jsonReq);
     this.client.sendMessage(jsonReq);
   }
 }
