@@ -1,0 +1,32 @@
+<div class="container">
+        <div class="row">
+                <div class="col-sm" style="max-width: 200px;">
+                        <form>
+                                <div class="form-group">
+                                        <label>Height</label>
+                                        <input  [(ngModel)]="width" [ngModelOptions]="{standalone: true}" class="form-control" type="text"
+                                                aria-describedby="emailHelp" placeholder="Enter height">
+                                </div>
+                        </form>
+                </div>
+                <div class="col-sm" style="max-width: 200px;">
+                        <form>
+                                <div class="form-group">
+                                        <label>Height</label>
+                                        <input [(ngModel)]="height" [ngModelOptions]="{standalone: true}" type="email" class="form-control" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp" placeholder="Enter width">
+                                </div>
+                        </form>
+                </div>
+                <div class="col-sm">
+                        <form>
+                                <div class="form-group">
+                                        <button style="border-color: rgb(84, 182, 101); min-width:150px;" type="button"
+                                                class="btn btn-info" (click)="CreatePicture()">run</button>
+
+                                </div>
+                        </form>
+                       
+                </div>
+        </div>
+</div>
