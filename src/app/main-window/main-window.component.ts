@@ -18,6 +18,8 @@ export class MainWindowComponent implements OnInit {
   public client: QueueClient
   constructor(private Service : PictureDoneService) { }
   public hubConnection: HubConnection;
+  account:string ="queuestorage2022";
+  sas:string="?sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2022-12-30T21:25:30Z&st=2022-11-26T13:25:30Z&spr=https&sig=yTS3k8yPAkdmYva8UfhMapkwi%2BsKDuGAX%2FPhYeJakS0%3D";
 @Input() width:string;
 @Input() height:string;
   CreatePicture(): void {
@@ -31,8 +33,8 @@ export class MainWindowComponent implements OnInit {
 
     setLogLevel("info");
 
-    //this.queueServiceClient = QueueServiceClient.fromConnectionString("DefaultEndpointsProtocol=https;AccountName=queuestorage2022;AccountKey=6gpbEog4UMyV93kavgeEJJfBTySSexyOh4+sfyC6r3++QOdSiiFDTTIPhRwiUrJq40qj/F/jWaxA+AStHnJhWw==;EndpointSuffix=core.windows.net");
-    //this.client = this.queueServiceClient.getQueueClient("queueclin")
+    this.queueServiceClient = new QueueServiceClient( `https://${this.account}.queue.core.windows.net${this.sas}`)
+    this.client = this.queueServiceClient.getQueueClient("queueclin")
 
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
@@ -54,17 +56,11 @@ export class MainWindowComponent implements OnInit {
     this.hubConnection.on("CalculatedMessage", (obj) =>
     {
         console.log("CalculationFinished");
+        this.Service.sendUpdate(obj as string);
         //Saver.SaveImage(Saver.Convert((string)obj), "C:\\temp" + $"/Picture74.bmp");
         //exit = true;
     });
   
-    this.hubConnection.on("CalculatedMessage", (obj) =>
-    {
-        console.log("finished...\n");
-        console.log(obj);
-        //Saver.SaveImage(Saver.Convert((string)obj), "C:\\temp" + $"/Picture74.bmp");
-        //exit = true;
-    });
 
     this.hubConnection.on("ProgressMessage", (obj) =>
     {
@@ -90,7 +86,7 @@ export class MainWindowComponent implements OnInit {
     console.log("starting...")
     console.log(this.height);
     console.log(this.width);
-    /*var req = new CalculationRequest();
+    var req = new CalculationRequest();
 
     req.Height = 120;
     req.Width = 120;
@@ -102,6 +98,6 @@ export class MainWindowComponent implements OnInit {
 
     var jsonReq = JSON.stringify(req);
 
-    this.queueClient.client.sendMessage(jsonReq);*/
+    this.client.sendMessage(jsonReq);
   }
 }
