@@ -11,7 +11,6 @@ import { ThisReceiver } from '@angular/compiler';
   styleUrls: ['./picture.component.css']
 })
 export class PictureComponent implements OnInit {
-  img = "https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg";
   private subscriptionName: Subscription;
  
   @ViewChild('can', { static: true })
@@ -23,7 +22,7 @@ export class PictureComponent implements OnInit {
   constructor(@Inject(DOCUMENT) document: Document, private Service: PictureDoneService) {
     this.subscriptionName = this.Service.getUpdate().subscribe
       (message => {
-        this.img = message;
+        this.imgS = message;
         this.createPicture()
       });
   }
