@@ -7,7 +7,7 @@ import { CalculationRequest } from '../calculation-request';
 import { PictureDoneService } from '../picture-done.service';
 import { QueueServiceService } from '../queue-service.service';
 import { SignalRService } from '../signal-r.service';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @Component({
@@ -20,8 +20,11 @@ export class MainWindowComponent implements OnInit {
   public client: QueueClient
   constructor(private Service: PictureDoneService) { }
   public hubConnection: HubConnection;
+
   account: string = "queuestorage2022";
   sas: string = "?sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2022-12-30T21:25:30Z&st=2022-11-26T13:25:30Z&spr=https&sig=yTS3k8yPAkdmYva8UfhMapkwi%2BsKDuGAX%2FPhYeJakS0%3D";
+  chunksArrived: number = 0;
+  @Input() progress: number = 0;
   @Input() width: string;
   @Input() height: string;
   CreatePicture(): void {
@@ -66,6 +69,8 @@ export class MainWindowComponent implements OnInit {
 
     this.hubConnection.on("ProgressMessage", (obj) => {
       console.log("Current Progress: " + obj);
+      this.chunksArrived + 1;
+      this.progress = this.calcProgress();
     });
 
     this.hubConnection.onclose(x => {
@@ -83,7 +88,8 @@ export class MainWindowComponent implements OnInit {
 
 
     console.log("starting...")
-
+    this.chunksArrived = 0;
+    this.progress = 0;
 
     var req = new CalculationRequest();
 
@@ -96,7 +102,7 @@ export class MainWindowComponent implements OnInit {
     req.YReminder = 1.0;
     req.Step = 0.03;
     req.MaxBetrag = 4,
-    req.MaxIterations = 18;
+      req.MaxIterations = 18;
     var jsonReq = JSON.stringify(req);
 
     /*let msg = '{\"RequestId\":\"" + this.newGuid() + "\",\"Height\":" + this.height +",\"Width\":"+ this.width +",\"CalculationId\":\"" + this.hubConnection.connectionId + "\",\"Parts\":" + "4.0" + ",\"XReminder\":" + "-2.0" +",\"YReminder\":"+ "1.0" + ",\"Step\":0.03,\"MaxBetrag\":4,\"MaxIterations\":18}'
@@ -113,8 +119,10 @@ export class MainWindowComponent implements OnInit {
         v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
+  }
 
-
+  calcProgress(): number {
+    return this.chunksArrived * 25;
   }
 
 }
