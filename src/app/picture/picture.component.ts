@@ -17,24 +17,22 @@ export class PictureComponent implements OnInit {
 
   canvas: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
- imgS = "";
 
   constructor(@Inject(DOCUMENT) document: Document, private Service: PictureDoneService) {
     this.subscriptionName = this.Service.getUpdate().subscribe
       (message => {
-        this.imgS = message;
-        this.createPicture()
+        this.createPicture(message)
       });
   }
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D;
   }
-  createPicture() {
+  createPicture(img:string) {
 
 
 
-      var pics = this.imgS.split(';');
+      var pics = img.split(';');
       pics.forEach(x => {
         let temp = x.split(',');
         //(50 + 8 * (int)xyv.Item3) % 254, (200 + 5 * (int)xyv.Item3) % 254, (200 + 10 * (int)xyv.Item3) % 254)
