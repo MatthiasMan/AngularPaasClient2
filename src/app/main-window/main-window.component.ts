@@ -65,7 +65,7 @@ export class MainWindowComponent implements OnInit {
 
 
     this.hubConnection.on("ProgressMessage", (obj) => {
-      console.log("Current Progress: " + obj.ToString());
+      console.log("Current Progress: " + obj);
     });
 
     this.hubConnection.onclose(x => {

@@ -22,7 +22,7 @@ export class PictureComponent implements OnInit {
     this.subscriptionName = this.Service.getUpdate().subscribe
       (message => {
         console.log(message);
-        this.createPicture(message)
+        this.createPicture(message.text);
       });
   }
 
