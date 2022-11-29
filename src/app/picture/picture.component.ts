@@ -21,6 +21,7 @@ export class PictureComponent implements OnInit {
   constructor(@Inject(DOCUMENT) document: Document, private Service: PictureDoneService) {
     this.subscriptionName = this.Service.getUpdate().subscribe
       (message => {
+        console.log(message);
         this.createPicture(message)
       });
   }
@@ -31,8 +32,9 @@ export class PictureComponent implements OnInit {
   createPicture(img:string) {
 
 
-
+    console.log("debug vorm img.split(';')");
       var pics = img.split(';');
+      console.log("splitted");
       pics.forEach(x => {
         let temp = x.split(',');
         //(50 + 8 * (int)xyv.Item3) % 254, (200 + 5 * (int)xyv.Item3) % 254, (200 + 10 * (int)xyv.Item3) % 254)

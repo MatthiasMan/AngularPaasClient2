@@ -7,6 +7,7 @@ import { CalculationRequest } from '../calculation-request';
 import { PictureDoneService } from '../picture-done.service';
 import { QueueServiceService } from '../queue-service.service';
 import { SignalRService } from '../signal-r.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @Component({
