@@ -56,6 +56,7 @@ export class MainWindowComponent implements OnInit {
     });
     this.hubConnection.on("CalculatedMessage", (obj) => {
       console.log("CalculationFinished");
+      console.log(obj);
       this.Service.sendUpdate(obj as string);
       //Saver.SaveImage(Saver.Convert((string)obj), "C:\\temp" + $"/Picture74.bmp");
       //exit = true;

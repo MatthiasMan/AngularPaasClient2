@@ -2,11 +2,7 @@ import { Guid } from "guid-typescript";
 
 export class CalculationRequest {
 
-    constructor() {
-        var l =  Guid.create();
-        this.RequestId = l.toString();
-
-    }
+    constructor() { }
 
     Height: number;
     Width: number;
