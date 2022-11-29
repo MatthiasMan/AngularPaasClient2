@@ -29,6 +29,10 @@
                        
                 </div>
         </div>
+        <div class="row" class="justify-content-center" >
+
+                <mat-spinner class="align-self-center" *ngIf="loading"></mat-spinner>
+        </div>
         <div class="row" style="height: 50px;">
 
                 <mat-progress-bar class="align-self-center" mode="determinate" [value]="progress" style="max-width: 800px;height: 20px;"></mat-progress-bar>

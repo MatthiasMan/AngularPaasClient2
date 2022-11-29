@@ -20,7 +20,7 @@ export class MainWindowComponent implements OnInit {
   public client: QueueClient
   constructor(private Service: PictureDoneService) { }
   public hubConnection: HubConnection;
-
+  public loading: boolean = false;
   account: string = "queuestorage2022";
   sas: string = "?sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2022-12-30T21:25:30Z&st=2022-11-26T13:25:30Z&spr=https&sig=yTS3k8yPAkdmYva8UfhMapkwi%2BsKDuGAX%2FPhYeJakS0%3D";
   chunksArrived: number = 0;
@@ -62,15 +62,14 @@ export class MainWindowComponent implements OnInit {
       console.log("CalculationFinished");
       console.log(obj);
       this.Service.sendUpdate(obj as string);
-      //Saver.SaveImage(Saver.Convert((string)obj), "C:\\temp" + $"/Picture74.bmp");
-      //exit = true;
+      this.loading = false;
     });
 
 
     this.hubConnection.on("ProgressMessage", (obj) => {
       console.log("Current Progress: " + obj);
       this.chunksArrived + 1;
-      this.progress = this.calcProgress();
+      this.progress = this.progress +25;
     });
 
     this.hubConnection.onclose(x => {
@@ -87,7 +86,8 @@ export class MainWindowComponent implements OnInit {
   run() {
 
 
-    console.log("starting...")
+    console.log("starting...");
+    this.loading = true;
     this.chunksArrived = 0;
     this.progress = 0;
 
