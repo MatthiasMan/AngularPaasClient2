@@ -30,6 +30,9 @@ export class PictureComponent implements OnInit {
         console.log("message.text" +message.text);
         console.log("message.height" + message.height);
         console.log("message.width " + message.width)
+        console.log(this.canvas.nativeElement.height);
+        console.log(this.canvas.nativeElement.width);
+
       });
   }
 
