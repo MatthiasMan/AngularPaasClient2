@@ -48,7 +48,7 @@ export class HistoryComponent implements OnInit {
     });
     
     this.hubConnection.on("HistoryMessage", (obj) => {
-      console.log(obj);
+      console.log("HistoryMessage: " + obj);
       let progress = JSON.parse(obj);
       
     });
@@ -57,11 +57,11 @@ export class HistoryComponent implements OnInit {
   sendHistoryRequest(){
     let base = btoa(this.hubConnection.connectionId!)
   this.hubConnection.send('GetHistory',this.hubConnection.connectionId).then((jj)=>{
-    console.log(jj);
+    console.log("send: " +jj);
   });
 
   this.hubConnection.invoke('GetHistory',this.hubConnection.connectionId).then((jj)=>{
-    console.log(jj);
+    console.log("invoke: " + jj);
   });
 
 }
