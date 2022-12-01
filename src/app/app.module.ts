@@ -13,7 +13,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SidebarModule } from 'ng-sidebar';
 import { HistoryComponent } from './history/history.component';
 import { ShowComponent } from './show/show.component';
-
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -32,6 +32,7 @@ import { ShowComponent } from './show/show.component';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     SidebarModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
