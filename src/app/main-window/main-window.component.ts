@@ -74,7 +74,7 @@ export class MainWindowComponent implements OnInit {
     this.hubConnection.on("ProgressMessage", (obj) => {
       console.log("Current Progress: " + obj);
       this.chunksArrived + 1;
-      this.progress = this.progress + 25;
+      this.progress = obj * 100;
     });
 
     this.hubConnection.onclose(x => {
