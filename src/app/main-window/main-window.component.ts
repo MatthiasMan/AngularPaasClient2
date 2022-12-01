@@ -87,14 +87,17 @@ export class MainWindowComponent implements OnInit {
   }
 
   run() {
+    this.setSize();
     console.log("starting...");
+    console.log(this.selectedSize);
     console.log(this.selectedValue);
+    console.log(this.height)
+    console.log(this.width)
     this.loading = true;
     this.chunksArrived = 0;
     this.progress = 0;
 
     var req = new CalculationRequest();
-    this.setSize();
     req.Height = this.height;
     req.Width = this.width;
     req.RequestId = this.newGuid();
@@ -112,15 +115,15 @@ export class MainWindowComponent implements OnInit {
     this.client.sendMessage(encode);
   }
   setSize() {
-    if (this.selectedSize == "small") {
+    if (this.selectedSize == "1") {
       this.height = 120;
       this.width = 120;
     }
-    if (this.selectedSize == "medium") {
+    if (this.selectedSize == "2") {
       this.height = 512;
       this.width = 512;
     }
-    if (this.selectedSize == "large") {
+    if (this.selectedSize == "3") {
       this.height = 1024;
       this.width = 1024;
     }
