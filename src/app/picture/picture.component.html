@@ -1,4 +1,12 @@
 <div class="container">
 
     <canvas #can  [height]="cnvsHeight" [width]="cnvsWidth" style="border-style: solid; width: 600px;height: 600px;"></canvas>
+    <form>
+        <div class="form-group">
+                <label>Height</label>
+                <input (ngModelChange)="change()" [ngModel]="height" [ngModelOptions]="{standalone: true}" class="form-control" type="text"
+                        aria-describedby="emailHelp" placeholder="Enter height">
+        </div>
+        <button (click)="c()"></button>
+</form>
 </div>

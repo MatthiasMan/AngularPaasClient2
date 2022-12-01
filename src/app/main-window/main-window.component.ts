@@ -41,7 +41,7 @@ export class MainWindowComponent implements OnInit {
     const { setLogLevel } = require("@azure/logger");
     setLogLevel("info");
 
-    /*this.queueServiceClient = new QueueServiceClient(`https://${environment.account}.queue.core.windows.net${environment.sas}`);
+    this.queueServiceClient = new QueueServiceClient(`https://${environment.account}.queue.core.windows.net${environment.sas}`);
     this.client = this.queueServiceClient.getQueueClient(environment.accountName)
 
     const options: IHttpConnectionOptions = {
@@ -83,7 +83,7 @@ export class MainWindowComponent implements OnInit {
     });
     this.hubConnection.onreconnected(x => {
       console.log("reconnected...")
-    });*/
+    });
   }
 
   run() {

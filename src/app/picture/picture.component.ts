@@ -15,8 +15,8 @@ export class PictureComponent implements OnInit {
   private subscriptionName: Subscription;
  cnvsHeight:number = 520;
  cnvsWidth:number = 520;
+ @Input() height: string;
   @ViewChild('can', { static: true })
-
   canvas: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
 
@@ -25,8 +25,8 @@ export class PictureComponent implements OnInit {
       (message => {
         console.log("message da")
         this.createPicture(message.text);
-        this.cnvsHeight = message.height;
-        this.cnvsWidth = message.width;
+        this.canvas.nativeElement.height = message.height;
+        this.canvas.nativeElement.width = message.width;
         console.log("message.text" +message.text);
         console.log("message.height" + message.height);
         console.log("message.width " + message.width)
@@ -56,8 +56,15 @@ export class PictureComponent implements OnInit {
   rgbToHex(r: number, g: number, b: number): string {
     return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
   }
-
-
+c(){
+  this.canvas.nativeElement.height = this.canvas.nativeElement.height +1;
+  console.log(this.ctx.canvas.height);
+}
+  change(){
+    this.canvas.nativeElement.height = 123;
+    console.log(this.height);
+    console.log(this.ctx.canvas.height);
+  }
   ngOnDestroy() { // It's a good practice to unsubscribe to ensure no memory leaks
     this.subscriptionName.unsubscribe();
   }
