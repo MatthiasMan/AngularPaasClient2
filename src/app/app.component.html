@@ -1,4 +1,15 @@
-<div>
-    <app-main-window></app-main-window>
-<app-picture></app-picture>
-</div>
+<ng-sidebar-container>
+    <ng-sidebar [opened]="opened">
+        <p>sidebar</p>
+        <button (click)="openSideBar()">Close</button>
+        <ul>
+            <li><a routerLink="show" (click)="openSideBar()">Calcute</a> </li>
+            <li><a routerLink="history" (click)="openSideBar()">history</a> </li>
+        </ul>
+    </ng-sidebar>
+    <div ng-sidebar-content>
+        <button (click)="openSideBar()">open sidebar</button>
+        <router-outlet></router-outlet>
+    
+    </div>
+</ng-sidebar-container>

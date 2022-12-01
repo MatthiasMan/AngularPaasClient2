@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AngularPaaSClient';
+  opened:boolean = false;
+
+  openSideBar(){
+
+    this.opened = !this.opened;
+  }
 }
