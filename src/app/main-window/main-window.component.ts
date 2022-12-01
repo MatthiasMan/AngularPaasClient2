@@ -43,7 +43,7 @@ console.log("environment.sas" + environment.sas);
 console.log("environment.hubToken: " + environment.hubToken);
 console.log("environment.signalRUrl: " +environment.signalRUrl);
     this.queueServiceClient = new QueueServiceClient(`https://${environment.account}.queue.core.windows.net${environment.sas}`);
-    this.client = this.queueServiceClient.getQueueClient(environment.account)
+    this.client = this.queueServiceClient.getQueueClient(environment.accountName)
 
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
