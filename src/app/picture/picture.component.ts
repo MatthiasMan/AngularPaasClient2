@@ -24,7 +24,6 @@ export class PictureComponent implements OnInit {
     this.subscriptionName = this.Service.getUpdate().subscribe
       (message => {
         console.log("message da")
-        this.createPicture(message.text);
         this.canvas.nativeElement.height = message.height;
         this.canvas.nativeElement.width = message.width;
         console.log("message.text" +message.text);
@@ -32,6 +31,7 @@ export class PictureComponent implements OnInit {
         console.log("message.width " + message.width)
         console.log(this.canvas.nativeElement.height);
         console.log(this.canvas.nativeElement.width);
+        this.createPicture(message.text);
 
       });
   }
