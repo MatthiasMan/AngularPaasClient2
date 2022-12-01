@@ -56,7 +56,7 @@ export class HistoryComponent implements OnInit {
   
   sendHistoryRequest(){
   //this.hubConnection.send('GetHistory',[this.hubConnection.connectionId,false]);
-  this.hubConnection.invoke('GetHistory',[this.hubConnection.connectionId as string,false as boolean])
+  this.hubConnection.invoke('GetHistory',[this.hubConnection.connectionId])
 
 }
 
