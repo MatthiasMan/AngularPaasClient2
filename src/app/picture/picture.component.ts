@@ -26,6 +26,9 @@ export class PictureComponent implements OnInit {
         this.createPicture(message.text);
         this.cnvsHeight = message.height;
         this.cnvsWidth = message.width;
+        console.log("message.text" +message.text);
+        console.log("message.height" + message.height);
+        console.log("message.width " + message.width)
       });
   }
 
@@ -36,7 +39,7 @@ export class PictureComponent implements OnInit {
       var pics = img.split(';');
       pics.forEach(x => {
         let temp = x.split(',');
-        //(50 + 8 * (int)xyv.Item3) % 254, (200 + 5 * (int)xyv.Item3) % 254, (200 + 10 * (int)xyv.Item3) % 254)
+
         let r = (50 + 8 * parseInt(temp[2])) % 254;
         let g = 200 + 5 * parseInt(temp[2]) % 254;
         let b = 200 + 10 * parseInt(temp[2]) % 254;
