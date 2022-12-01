@@ -1,28 +1,10 @@
 <div class="container">
         <div class="row">
-                <div class="col-sm" style="max-width: 200px;">
-                        <form>
-                                <div class="form-group">
-                                        <label>Height</label>
-                                        <input  [(ngModel)]="width" [ngModelOptions]="{standalone: true}" class="form-control" type="text"
-                                                aria-describedby="emailHelp" placeholder="Enter height">
-                                </div>
-                        </form>
-                </div>
-                <div class="col-sm" style="max-width: 200px;">
-                        <form>
-                                <div class="form-group">
-                                        <label>Width</label>
-                                        <input [(ngModel)]="height" [ngModelOptions]="{standalone: true}" type="email" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter width">
-                                </div>
-                        </form>
-                </div>
-                <div class="col-sm" style="max-width: 200px;">
+                <div class="col-sm" style="max-width: 200px; margin: 5px;">
                         <form>
                                 <div class="form-group">
                                         <mat-form-field appearance="fill">
-                                                <mat-label>Parts Count</mat-label>
+                                                <mat-label>Size</mat-label>
                                                 <mat-select [(value)]="selectedSize">
                                                   <mat-option value="1">small</mat-option>
                                                   <mat-option value="2">medium</mat-option>
@@ -32,7 +14,7 @@
                                 </div>
                         </form>
                 </div>
-                <div class="col-sm" style="max-width: 200px;">
+                <div class="col-sm" style="max-width: 200px; margin: 5px;">
                         <form>
                                 <div class="form-group">
                                         <mat-form-field appearance="fill">
@@ -51,11 +33,9 @@
                 </div>
         </div>
         <div class="row" class="justify-content-center" >
-
                 <mat-spinner class="align-self-center" *ngIf="loading"></mat-spinner>
         </div>
         <div class="row" style="height: 50px;">
-
                 <mat-progress-bar class="align-self-center" mode="determinate" [value]="progress" style="max-width: 800px;height: 20px;"></mat-progress-bar>
         </div>
 </div>

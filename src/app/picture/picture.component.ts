@@ -23,16 +23,9 @@ export class PictureComponent implements OnInit {
   constructor(@Inject(DOCUMENT) document: Document, private Service: PictureDoneService) {
     this.subscriptionName = this.Service.getUpdate().subscribe
       (message => {
-        console.log("message da")
         this.canvas.nativeElement.height = message.height;
         this.canvas.nativeElement.width = message.width;
-        console.log("message.text" +message.text);
-        console.log("message.height" + message.height);
-        console.log("message.width " + message.width)
-        console.log(this.canvas.nativeElement.height);
-        console.log(this.canvas.nativeElement.width);
         this.createPicture(message.text);
-
       });
   }
 
@@ -60,11 +53,6 @@ c(){
   this.canvas.nativeElement.height = this.canvas.nativeElement.height +1;
   console.log(this.ctx.canvas.height);
 }
-  change(){
-    this.canvas.nativeElement.height = 123;
-    console.log(this.height);
-    console.log(this.ctx.canvas.height);
-  }
   ngOnDestroy() { // It's a good practice to unsubscribe to ensure no memory leaks
     this.subscriptionName.unsubscribe();
   }
