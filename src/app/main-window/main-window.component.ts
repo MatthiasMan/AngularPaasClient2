@@ -24,7 +24,7 @@ export class MainWindowComponent implements OnInit {
   constructor(private Service: PictureDoneService) { }
   public hubConnection: HubConnection;
   public loading: boolean = false;
-  selectedValue: number;
+  selectedValue: number = 4;
   chunksArrived: number = 0;
   @Input() progress: number = 0;
   @Input() width: string;

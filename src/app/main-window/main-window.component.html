@@ -21,7 +21,6 @@
                 <div class="col-sm" style="max-width: 200px;">
                         <form>
                                 <div class="form-group">
-                                        <label>Part count(4/)</label>
                                         <mat-form-field appearance="fill">
                                                 <mat-label>Parts Count</mat-label>
                                                 <mat-select [(value)]="selectedValue">
@@ -32,16 +31,9 @@
                                 </div>
                         </form>
                 </div>
-                <p>{{selectedValue}}</p>
-                <div class="col-sm">
-                        <form>
-                                <div class="form-group">
-                                        <button style="border-color: rgb(84, 182, 101); min-width:150px;" type="button"
-                                                class="btn btn-info" (click)="run()">run</button>
-
-                                </div>
-                        </form>
-                       
+                <div class="col-sm align-self-center">
+                                        <button style="border-color: rgb(84, 182, 101); min-width:150px; align-self: center;" type="button"
+                                                class="btn btn-info" (click)="run()">run</button>             
                 </div>
         </div>
         <div class="row" class="justify-content-center" >
