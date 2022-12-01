@@ -40,7 +40,7 @@ export class HistoryComponent implements OnInit {
   }
   
   sendHistoryRequest(){
-  this.hubConnection.send('GetHistory');
+  this.hubConnection.send('GetHistory',[this.hubConnection.connectionId,false]);
 
 }
 
