@@ -25,18 +25,23 @@ export class HistoryComponent implements OnInit {
       .withAutomaticReconnect()
       .build();
 
-    this.hubConnection.start().then(function () {
+    this.hubConnection.start().then(()=> {
       console.log('SignalR Connected!');
+      this.sendHistoryRequest()
     }).catch(function (err) {
       return console.error(err.toString());
     });
-
+    
     this.hubConnection.on("HistoryMessage", (obj) => {
       console.log(obj);
       let progress = JSON.parse(obj);
-
+      
     });
-    this.hubConnection.send('GetHistory');
   }
+  
+  sendHistoryRequest(){
+  this.hubConnection.send('GetHistory');
+
+}
 
 }
