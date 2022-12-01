@@ -22,7 +22,7 @@ export class MainWindowComponent implements OnInit {
   constructor(private Service: PictureDoneService) { }
   public hubConnection: HubConnection;
   public loading: boolean = false;
-  
+
   chunksArrived: number = 0;
   @Input() progress: number = 0;
   @Input() width: string;
@@ -37,13 +37,17 @@ export class MainWindowComponent implements OnInit {
     const { setLogLevel } = require("@azure/logger");
 
     setLogLevel("info");
-
+console.log("environment.account: " + environment.account);
+console.log("environment.accountName: " + environment.accountName);
+console.log("environment.sas" + environment.sas);
+console.log("environment.hubToken: " + environment.hubToken);
+console.log("environment.signalRUrl: " +environment.signalRUrl);
     this.queueServiceClient = new QueueServiceClient(`https://${environment.account}.queue.core.windows.net${environment.sas}`);
     this.client = this.queueServiceClient.getQueueClient(environment.account)
 
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
-        return environment.hubToken ;
+        return environment.hubToken;
       }
     };
 
@@ -69,7 +73,7 @@ export class MainWindowComponent implements OnInit {
     this.hubConnection.on("ProgressMessage", (obj) => {
       console.log("Current Progress: " + obj);
       this.chunksArrived + 1;
-      this.progress = this.progress +25;
+      this.progress = this.progress + 25;
     });
 
     this.hubConnection.onclose(x => {
@@ -102,7 +106,8 @@ export class MainWindowComponent implements OnInit {
     req.YReminder = 1.0;
     req.Step = 0.03;
     req.MaxBetrag = 4,
-      req.MaxIterations = 18;
+    req.MaxIterations = 18;
+
     var jsonReq = JSON.stringify(req);
 
     /*let msg = '{\"RequestId\":\"" + this.newGuid() + "\",\"Height\":" + this.height +",\"Width\":"+ this.width +",\"CalculationId\":\"" + this.hubConnection.connectionId + "\",\"Parts\":" + "4.0" + ",\"XReminder\":" + "-2.0" +",\"YReminder\":"+ "1.0" + ",\"Step\":0.03,\"MaxBetrag\":4,\"MaxIterations\":18}'
