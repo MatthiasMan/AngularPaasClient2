@@ -23,6 +23,20 @@
                                 <div class="form-group">
                                         <mat-form-field appearance="fill">
                                                 <mat-label>Parts Count</mat-label>
+                                                <mat-select [(value)]="selectedSize">
+                                                  <mat-option value="1">small</mat-option>
+                                                  <mat-option value="2">medium</mat-option>
+                                                  <mat-option value="3">Large</mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                </div>
+                        </form>
+                </div>
+                <div class="col-sm" style="max-width: 200px;">
+                        <form>
+                                <div class="form-group">
+                                        <mat-form-field appearance="fill">
+                                                <mat-label>Parts Count</mat-label>
                                                 <mat-select [(value)]="selectedValue">
                                                   <mat-option value="4">4</mat-option>
                                                   <mat-option value="16">16</mat-option>

@@ -26,13 +26,14 @@ export class MainWindowComponent implements OnInit {
   public loading: boolean = false;
   selectedValue: number = 4;
   chunksArrived: number = 0;
+  selectedSize: string;
   @Input() progress: number = 0;
-  @Input() width: string;
-  @Input() height: string;
-  @Input() parts:string;
-  partOptions:ValueViewValuePair[] = [
-    {Value: 4, ViewValue: '4'},
-    {Value: 16, ViewValue: '16'},
+  @Input() width: number;
+  @Input() height: number;
+  @Input() parts: string;
+  partOptions: ValueViewValuePair[] = [
+    { Value: 4, ViewValue: '4' },
+    { Value: 16, ViewValue: '16' },
 
   ];
 
@@ -40,7 +41,7 @@ export class MainWindowComponent implements OnInit {
     const { setLogLevel } = require("@azure/logger");
     setLogLevel("info");
 
-    this.queueServiceClient = new QueueServiceClient(`https://${environment.account}.queue.core.windows.net${environment.sas}`);
+    /*this.queueServiceClient = new QueueServiceClient(`https://${environment.account}.queue.core.windows.net${environment.sas}`);
     this.client = this.queueServiceClient.getQueueClient(environment.accountName)
 
     const options: IHttpConnectionOptions = {
@@ -63,7 +64,7 @@ export class MainWindowComponent implements OnInit {
 
     this.hubConnection.on("CalculatedMessage", (obj) => {
       console.log("CalculationFinished");
-      this.Service.sendUpdate(obj as string,parseInt(this.height),parseInt(this.width));
+      this.Service.sendUpdate(obj as string, this.height, this.width);
       this.loading = false;
     });
 
@@ -82,7 +83,7 @@ export class MainWindowComponent implements OnInit {
     });
     this.hubConnection.onreconnected(x => {
       console.log("reconnected...")
-    });
+    });*/
   }
 
   run() {
@@ -93,9 +94,9 @@ export class MainWindowComponent implements OnInit {
     this.progress = 0;
 
     var req = new CalculationRequest();
-
-    req.Height = parseInt(this.height);
-    req.Width = parseInt(this.width);
+    this.setSize();
+    req.Height = this.height;
+    req.Width = this.width;
     req.RequestId = this.newGuid();
     req.CalculationId = this.hubConnection.connectionId!;
     req.Parts = this.selectedValue;
@@ -103,14 +104,27 @@ export class MainWindowComponent implements OnInit {
     req.YReminder = 1.0;
     req.Step = 0.03;
     req.MaxBetrag = 4,
-    req.MaxIterations = 18;
+      req.MaxIterations = 18;
 
     var jsonReq = JSON.stringify(req);
 
     const encode = btoa(jsonReq);
     this.client.sendMessage(encode);
   }
-
+  setSize() {
+    if (this.selectedSize == "small") {
+      this.height = 120;
+      this.width = 120;
+    }
+    if (this.selectedSize == "medium") {
+      this.height = 512;
+      this.width = 512;
+    }
+    if (this.selectedSize == "large") {
+      this.height = 1024;
+      this.width = 1024;
+    }
+  }
   newGuid() {
     return 'xxxxxxxx-xxxx-4xxx-9xxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
       var r = Math.random() * 16 | 0,
