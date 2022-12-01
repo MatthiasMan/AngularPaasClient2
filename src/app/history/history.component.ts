@@ -26,7 +26,7 @@ export class HistoryComponent implements OnInit {
   ];
   dataSource = this.ELEMENT_DATA;
   constructor() { }
-
+progress:Progress[];
   ngOnInit(): void {
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
@@ -49,7 +49,7 @@ export class HistoryComponent implements OnInit {
     
     this.hubConnection.on("HistoryMessage", (obj) => {
       console.log("HistoryMessage: " + obj);
-      let progress = JSON.parse(obj);
+      this.progress = JSON.parse(obj);
       
     });
   }
@@ -60,9 +60,9 @@ export class HistoryComponent implements OnInit {
     console.log("send: " +jj);
   });
 
-  this.hubConnection.invoke('GetHistory',this.hubConnection.connectionId).then((jj)=>{
+  /*this.hubConnection.invoke('GetHistory',this.hubConnection.connectionId).then((jj)=>{
     console.log("invoke: " + jj);
-  });
+  });*/
 
 }
 

@@ -1,7 +1,8 @@
 export class Progress {
     
     Created:string
-    ConnectionId:number;
+    ConnectionId:string;
     Parts:number;
-    RequestId:string
+    RequestId:string;
+    Percentage:number;
 }
