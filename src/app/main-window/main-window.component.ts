@@ -8,6 +8,7 @@ import { PictureDoneService } from '../picture-done.service';
 import { QueueServiceService } from '../queue-service.service';
 import { SignalRService } from '../signal-r.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -21,8 +22,7 @@ export class MainWindowComponent implements OnInit {
   constructor(private Service: PictureDoneService) { }
   public hubConnection: HubConnection;
   public loading: boolean = false;
-  account: string = "queuestorage2022";
-  sas: string = "?sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2022-12-30T21:25:30Z&st=2022-11-26T13:25:30Z&spr=https&sig=yTS3k8yPAkdmYva8UfhMapkwi%2BsKDuGAX%2FPhYeJakS0%3D";
+  
   chunksArrived: number = 0;
   @Input() progress: number = 0;
   @Input() width: string;
@@ -38,18 +38,18 @@ export class MainWindowComponent implements OnInit {
 
     setLogLevel("info");
 
-    this.queueServiceClient = new QueueServiceClient(`https://${this.account}.queue.core.windows.net${this.sas}`);
-    this.client = this.queueServiceClient.getQueueClient("queueclin")
+    this.queueServiceClient = new QueueServiceClient(`https://${environment.account}.queue.core.windows.net${environment.sas}`);
+    this.client = this.queueServiceClient.getQueueClient(environment.account)
 
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
-        return "eyJhbGciOiJIUzI1NiIsIeyJhbGciOiJIUzI1NiIsImtpZCI6IjEzODcwMDc5NzMiLCJ0eXAiOiJKV1QifQ.eyJhc3JzLnMuYXV0IjoiV2ViSm9ic0F1dGhMZXZlbCIsIm5iZiI6MTY2ODI0OTI5OCwiZXhwIjoxNjY4MjUyODk4LCJpYXQiOjE2NjgyNDkyOTgsImF1ZCI6Imh0dHBzOi8vdmFtYXNpZ25hbHIuc2VydmljZS5zaWduYWxyLm5ldC9jbGllbnQvP2h1Yj12YW1haHViIn0.Bg6ceMyfXsyhE5axR8_-GFO6RtaNTaTHXgg_GYIMFoImtpZCI6IjEzODcwMDc5NzMiLCJ0eXAiOiJKV1QifQ";
+        return environment.hubToken ;
       }
     };
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
-      .withUrl("https://vamahubserver.azurewebsites.net/vamahub", options)
+      .withUrl(environment.signalRUrl, options)
       .withAutomaticReconnect()
       .build();
 
