@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./main-window.component.css']
 })
 export class MainWindowComponent implements OnInit {
+
   private queueServiceClient: QueueServiceClient;
   public client: QueueClient
   constructor(private Service: PictureDoneService) { }
@@ -27,21 +28,15 @@ export class MainWindowComponent implements OnInit {
   @Input() progress: number = 0;
   @Input() width: string;
   @Input() height: string;
+
   CreatePicture(): void {
-    console.log(this.height);
-    console.log(this.width);
     this.Service.sendUpdate('Message from Sender Component to Receiver Component!');
   }
 
   ngOnInit(): void {
     const { setLogLevel } = require("@azure/logger");
-
     setLogLevel("info");
-console.log("environment.account: " + environment.account);
-console.log("environment.accountName: " + environment.accountName);
-console.log("environment.sas" + environment.sas);
-console.log("environment.hubToken: " + environment.hubToken);
-console.log("environment.signalRUrl: " +environment.signalRUrl);
+
     this.queueServiceClient = new QueueServiceClient(`https://${environment.account}.queue.core.windows.net${environment.sas}`);
     this.client = this.queueServiceClient.getQueueClient(environment.accountName)
 
@@ -62,6 +57,7 @@ console.log("environment.signalRUrl: " +environment.signalRUrl);
     }).catch(function (err) {
       return console.error(err.toString());
     });
+
     this.hubConnection.on("CalculatedMessage", (obj) => {
       console.log("CalculationFinished");
       console.log(obj);
@@ -110,11 +106,7 @@ console.log("environment.signalRUrl: " +environment.signalRUrl);
 
     var jsonReq = JSON.stringify(req);
 
-    /*let msg = '{\"RequestId\":\"" + this.newGuid() + "\",\"Height\":" + this.height +",\"Width\":"+ this.width +",\"CalculationId\":\"" + this.hubConnection.connectionId + "\",\"Parts\":" + "4.0" + ",\"XReminder\":" + "-2.0" +",\"YReminder\":"+ "1.0" + ",\"Step\":0.03,\"MaxBetrag\":4,\"MaxIterations\":18}'
-    console.log(msg);*/
-
     const encode = btoa(jsonReq);
-    console.log("e: " + encode);
     this.client.sendMessage(encode);
   }
 
