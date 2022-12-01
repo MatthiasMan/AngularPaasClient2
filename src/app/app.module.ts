@@ -14,6 +14,7 @@ import { SidebarModule } from 'ng-sidebar';
 import { HistoryComponent } from './history/history.component';
 import { ShowComponent } from './show/show.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     SidebarModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

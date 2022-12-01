@@ -18,6 +18,21 @@
                                 </div>
                         </form>
                 </div>
+                <div class="col-sm" style="max-width: 200px;">
+                        <form>
+                                <div class="form-group">
+                                        <label>Part count(4/)</label>
+                                        <mat-form-field appearance="fill">
+                                                <mat-label>Parts Count</mat-label>
+                                                <mat-select [(value)]="selectedValue">
+                                                  <mat-option value="4">4</mat-option>
+                                                  <mat-option value="16">16</mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                </div>
+                        </form>
+                </div>
+                <p>{{selectedValue}}</p>
                 <div class="col-sm">
                         <form>
                                 <div class="form-group">

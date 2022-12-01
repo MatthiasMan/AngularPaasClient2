@@ -21,7 +21,6 @@ export class PictureComponent implements OnInit {
   constructor(@Inject(DOCUMENT) document: Document, private Service: PictureDoneService) {
     this.subscriptionName = this.Service.getUpdate().subscribe
       (message => {
-        console.log(message);
         this.createPicture(message.text);
       });
   }
@@ -30,11 +29,7 @@ export class PictureComponent implements OnInit {
     this.ctx = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D;
   }
   createPicture(img:string) {
-
-
-    console.log("debug vorm img.split(';')");
       var pics = img.split(';');
-      console.log("splitted");
       pics.forEach(x => {
         let temp = x.split(',');
         //(50 + 8 * (int)xyv.Item3) % 254, (200 + 5 * (int)xyv.Item3) % 254, (200 + 10 * (int)xyv.Item3) % 254)
@@ -43,8 +38,6 @@ export class PictureComponent implements OnInit {
         let b = 200 + 10 * parseInt(temp[2]) % 254;
         this.ctx.fillStyle = this.rgbToHex(r,g,b);
         this.ctx.fillRect(parseInt(temp[0]),parseInt(temp[1]),1,1);
-
-
       })
     }
 

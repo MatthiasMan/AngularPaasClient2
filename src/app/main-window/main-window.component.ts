@@ -9,6 +9,7 @@ import { QueueServiceService } from '../queue-service.service';
 import { SignalRService } from '../signal-r.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { environment } from 'src/environments/environment';
+import { ValueViewValuePair } from '../value-view-value-pair';
 
 
 @Component({
@@ -23,12 +24,17 @@ export class MainWindowComponent implements OnInit {
   constructor(private Service: PictureDoneService) { }
   public hubConnection: HubConnection;
   public loading: boolean = false;
-
+  selectedValue: number;
   chunksArrived: number = 0;
   @Input() progress: number = 0;
   @Input() width: string;
   @Input() height: string;
+  @Input() parts:string;
+  partOptions:ValueViewValuePair[] = [
+    {Value: 4, ViewValue: '4'},
+    {Value: 16, ViewValue: '16'},
 
+  ];
   CreatePicture(): void {
     this.Service.sendUpdate('Message from Sender Component to Receiver Component!');
   }
@@ -60,7 +66,6 @@ export class MainWindowComponent implements OnInit {
 
     this.hubConnection.on("CalculatedMessage", (obj) => {
       console.log("CalculationFinished");
-      console.log(obj);
       this.Service.sendUpdate(obj as string);
       this.loading = false;
     });
@@ -84,9 +89,8 @@ export class MainWindowComponent implements OnInit {
   }
 
   run() {
-
-
     console.log("starting...");
+    console.log(this.selectedValue);
     this.loading = true;
     this.chunksArrived = 0;
     this.progress = 0;
@@ -97,7 +101,7 @@ export class MainWindowComponent implements OnInit {
     req.Width = parseInt(this.width);
     req.RequestId = this.newGuid();
     req.CalculationId = this.hubConnection.connectionId!;
-    req.Parts = 4.0;
+    req.Parts = this.selectedValue;
     req.XReminder = -2.0;
     req.YReminder = 1.0;
     req.Step = 0.03;
