@@ -26,6 +26,7 @@ export class MainWindowComponent implements OnInit {
   public loading: boolean = false;
   selectedValue: number = 4;
   chunksArrived: number = 0;
+  step: number = 0.03;
   selectedSize: string;
   @Input() progress: number = 0;
   @Input() width: number;
@@ -104,8 +105,8 @@ export class MainWindowComponent implements OnInit {
     req.CalculationId = this.hubConnection.connectionId!;
     req.Parts = this.selectedValue;
     req.XReminder = -2.0;
-    req.YReminder = 1.0;
-    req.Step = 0.03;
+    req.YReminder = 1.2;
+    req.Step = this.step;
     req.MaxBetrag = 4,
       req.MaxIterations = 18;
 
@@ -118,14 +119,17 @@ export class MainWindowComponent implements OnInit {
     if (this.selectedSize == "1") {
       this.height = 120;
       this.width = 120;
+      this.step = 0.03;
     }
     if (this.selectedSize == "2") {
       this.height = 512;
       this.width = 512;
+      this.step = 0.005;
     }
     if (this.selectedSize == "3") {
       this.height = 1024;
       this.width = 1024;
+      this.step = 0.0023;
     }
   }
   newGuid() {
