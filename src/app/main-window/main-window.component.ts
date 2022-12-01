@@ -35,9 +35,6 @@ export class MainWindowComponent implements OnInit {
     {Value: 16, ViewValue: '16'},
 
   ];
-  CreatePicture(): void {
-    this.Service.sendUpdate('Message from Sender Component to Receiver Component!');
-  }
 
   ngOnInit(): void {
     const { setLogLevel } = require("@azure/logger");
@@ -66,7 +63,7 @@ export class MainWindowComponent implements OnInit {
 
     this.hubConnection.on("CalculatedMessage", (obj) => {
       console.log("CalculationFinished");
-      this.Service.sendUpdate(obj as string);
+      this.Service.sendUpdate(obj as string,parseInt(this.height),parseInt(this.width));
       this.loading = false;
     });
 

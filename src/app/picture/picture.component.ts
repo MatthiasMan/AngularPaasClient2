@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { PictureDoneService } from '../picture-done.service';
 import { Subscription } from 'rxjs';
 import { ThisReceiver } from '@angular/compiler';
+import { CanvasValuesService } from '../canvas-values.service';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class PictureComponent implements OnInit {
   private subscriptionName: Subscription;
- 
+ cnvsHeight:number = 120;
+ cnvsWidth:number = 120;
   @ViewChild('can', { static: true })
 
   canvas: ElementRef<HTMLCanvasElement>;
@@ -22,6 +24,8 @@ export class PictureComponent implements OnInit {
     this.subscriptionName = this.Service.getUpdate().subscribe
       (message => {
         this.createPicture(message.text);
+        this.cnvsHeight = message.height;
+        this.cnvsWidth = message.width;
       });
   }
 
